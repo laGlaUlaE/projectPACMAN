@@ -22,7 +22,7 @@ public class Food extends Drawable {
     @Override
     public DrawingInformation draw() {
         //TODO: IMPLEMENT
-        if(!cancella) return new DrawingInformation(' ', Color.BLACK) ; //Cibo mangiato
+        if(cancella) return new DrawingInformation(' ', Color.BLACK) ; //Cibo mangiato
         else return new DrawingInformation('•', Color.YELLOW) ; //Cibo non mangiato
     }
 
