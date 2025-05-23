@@ -58,9 +58,11 @@ public class Ghost extends Drawable {
             /**scelgo una direzione tra le disponibili*/
             currentDirection = filtered.get(random.nextInt(filtered.size()));
         }
+        /**aggiorno le coordinate del fantasma*/
+        coordinates = getNextCoordinates(currentDirection);
     }
     
-    /** Metodo privato che calcola nuove coordinate in base alla direzione data*/
+    /**Metodo privato che calcola nuove coordinate in base alla direzione data*/
     private Coordinates getNextCoordinates(Direction direction) {
         int row = coordinates.getRow();
         int col = coordinates.getCol();
@@ -75,7 +77,7 @@ public class Ghost extends Drawable {
         return new Coordinates(row, col);
     }
 
-    /**metoto per passare alla grafica il simbolo e il colore del fantasma*/
+    /**metodo per passare alla grafica il simbolo e il colore del fantasma*/
     @Override
     public DrawingInformation draw() {
     	
