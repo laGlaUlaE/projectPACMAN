@@ -30,6 +30,13 @@ public class Player extends Controllable {
         setDirection(direction);
     }
 
+private Coordinates getNextCoordinates(Direction direction) {
+    int row = coordinates.getRow();
+    int col = coordinates.getCol();
+
+    switch  (direction) {
+        case up 
+    
     @Override
     public void update() {
         // Aggiorna la posizione del giocatore in base alla direzione
