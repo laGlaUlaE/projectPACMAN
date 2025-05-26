@@ -23,7 +23,7 @@ public class Food extends Drawable {
     public DrawingInformation draw() {
         //TODO: IMPLEMENT
         if(cancella) return new DrawingInformation(' ', Color.BLACK) ; //Cibo mangiato
-        else return new DrawingInformation('•', Color.YELLOW) ; //Cibo non mangiato
+        else return new DrawingInformation('f', Color.YELLOW) ; //Cibo non mangiato
     }
 
     public void markAsDeleted() { //Segna se il cibo è stato mangiato
