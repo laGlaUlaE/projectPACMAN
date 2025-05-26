@@ -9,74 +9,49 @@ import java.awt.*;
 
 public class Player extends Controllable {
 
-    private boolean isWinner;
-    private int life;
-    private Coordinates initialCoordinates;
-    private Direction direction;
-
-// Costruttore: inizializza le coordinate e lo stato del giocatore
     public Player(Coordinates coordinates) {
         super(coordinates);
-        this.coordinates = coordinates;
-        this.initialCoordinates = new Coordinates(coordinates.getRow(), coordinates.getCol());
-        this.life = 3; // vite iniziali
-        this.isWinner = false;
-        this.direction = Direction.UP;
     }
 
     @Override
     public void move(Direction direction) {
-        // Aggiorna la direzione del movimento
-        setDirection(direction);
+        //TODO IMPLEMENT
     }
 
-private Coordinates getNextCoordinates(Direction direction) {
-    int row = coordinates.getRow();
-    int col = coordinates.getCol();
-
-    switch  (direction) {
-        case up 
-    
     @Override
     public void update() {
-        // Aggiorna la posizione del giocatore in base alla direzione
-        Coordinates newCoords = getNextCoordinates(direction); 
-        this.coordinates = newCoords;
+        //TODO IMPLEMENT
     }
 
     public boolean isWinner() {
-        return isWinner;
+        //TODO IMPLEMENT
+        return false;
     }
 
     public boolean isLooser() {
-        // Il giocatore ha perso se ha finito le vite
-        return life <= 0;
+        //TODO IMPLEMENT
+        return false;
     }
 
     public void markAsWinner() {
-        isWinner = true;
+        //TODO IMPLEMENT
     }
 
     public void handleDamage() {
-        // Riduce le vite di 1 (ma non va sotto zero)
-        if (life > 0) {
-            life--;
-        }
+        //TODO IMPLEMENT
     }
 
     @Override
     public DrawingInformation draw() {
-        // Disegna Pac-Man come un cerchio giallo 
-        return new DrawingInformation('P', Color.YELLOW);
+        return new DrawingInformation(' ', Color.BLACK);
     }
 
     public void resetCoordinates() {
-        // Riporta il giocatore alla posizione iniziale
-        this.coordinates = new Coordinates (initialCoordinates.getRow(), initialCoordinates.getCol());
-       
+        //TODO IMPLEMENT
     }
 
     public int getLife() {
-        return life;
+        //TODO IMPLEMENT
+        return 0;
     }
 }
