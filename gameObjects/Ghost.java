@@ -11,12 +11,12 @@ import java.util.Random;
 
 public class Ghost extends Drawable {
 	
-	/**attibuti necessari*/
+	/**attibuti*/
 	private Direction currentDirection; //serve per capire la direzione attuale del fantasma
 	private ArrayList<Direction> availableDirections; //lista delle direzioni disponibili in cui si puo' muovere
 	
 
-	/**oggetto random utile per scegliere la direzione da prendere*/
+	/**oggetto random per scegliere la direzione da prendere*/
 	private static final Random random = new Random();
 	
 	/**costruttore*/
@@ -37,31 +37,38 @@ public class Ghost extends Drawable {
 
     /**metodo che viene chiamato ogni volta che viene aggiornato lo stato*/
     @Override
-    public void update() {
-    	
-        //TODO: IMPLEMENT
-        if (!availableDirections.contains(currentDirection)) {
-            /**trovo la direzione opposta alla attuale*/
+    public void update(){
+        //50% di probabilità di cambiare direzione anche se la direzione attuale e' ancora valida
+        boolean forceChange = random.nextDouble() < 0.55;
+
+        //cambia direzione c'e' un vicolo cieco o se la direzione attuale non e' più disponibile
+        if (forceChange || !availableDirections.contains(currentDirection)){
+            //ottieni la direzione opposta a quella attuale per evitare di tornare indietro
             Direction opposite = Direction.getOpposite(currentDirection);
 
-            /**filtro le direzioni ed escludo quella opposta*/
+            //crea una lista delle direzioni disponibili che non sono opposte alla direzione attuale
             ArrayList<Direction> filtered = new ArrayList<>();
             for (Direction dir : availableDirections) {
                 if (dir != opposite) {
-                    filtered.add(dir);
+                    filtered.add(dir); //aggiunge solo direzioni diverse da quella opposta
                 }
             }
-            /**se tutte sono opposte scelgo qualcosa tra le disponibili*/
+
+            //se tutte le direzioni disponibili erano opposte, allora si considerano comunque
             if (filtered.isEmpty()) {
                 filtered = availableDirections;
             }
-            /**scelgo una direzione tra le disponibili*/
-            currentDirection = filtered.get(random.nextInt(filtered.size()));
+
+            //se c'e' almeno una direzione disponibile, scelgo una direzione casuale tra quelle filtrate
+            if (!filtered.isEmpty()) {
+                currentDirection = filtered.get(random.nextInt(filtered.size()));
+            }
         }
-        /**aggiorno le coordinate del fantasma*/
+
+        //aggiorno le coordinate del fantasma spostandolo nella direzione scelta
         coordinates = getNextCoordinates(currentDirection);
     }
-    
+
     /**Metodo privato che calcola nuove coordinate in base alla direzione data*/
     private Coordinates getNextCoordinates(Direction direction) {
         int row = coordinates.getRow();
@@ -73,15 +80,16 @@ public class Ghost extends Drawable {
             case LEFT:  col -= 1; break;
             case RIGHT: col += 1; break;
         }
-        /**Ritorna un nuovo oggetto Coordinates con la nuova posizione*/
+        //Ritorna un nuovo oggetto Coordinates con la nuova posizione
         return new Coordinates(row, col);
     }
 
+    
     /**metodo per passare alla grafica il simbolo e il colore del fantasma*/
     @Override
     public DrawingInformation draw() {
     	
         //TODO: IMPLEMENT
-        return new DrawingInformation('☻', Color.magenta);
+        return new DrawingInformation('G', Color.magenta);
     }
 }
