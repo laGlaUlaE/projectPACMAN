@@ -12,13 +12,16 @@ public class Player extends Controllable {
     private boolean isWinner;
     private int life;
     private Coordinates initialCoordinates;
+    private Direction direction;
 
 // Costruttore: inizializza le coordinate e lo stato del giocatore
     public Player(Coordinates coordinates) {
         super(coordinates);
-        this.initialCoordinates = new Coordinates(coordinates.getX(), coordinates.getY());
+        this.coordinates = coordinates;
+        this.initialCoordinates = new Coordinates(coordinates.getRow(), coordinates.getCol());
         this.life = 3; // vite iniziali
         this.isWinner = false;
+        this.direction = Direction.UP;
     }
 
     @Override
@@ -30,7 +33,8 @@ public class Player extends Controllable {
     @Override
     public void update() {
         // Aggiorna la posizione del giocatore in base alla direzione
-        getCoordinates().moveTo(getCoordinates().next(getDirection()));
+        Coordinates new newCoords = getNextCoordinates(direction); 
+        this.coordinates = newCoords;
     }
 
     public boolean isWinner() {
@@ -55,13 +59,14 @@ public class Player extends Controllable {
 
     @Override
     public DrawingInformation draw() {
-        // Disegna Pac-Man come un cerchio giallo (es. 'C')
-        return new DrawingInformation('C', Color.YELLOW);
+        // Disegna Pac-Man come un cerchio giallo 
+        return new DrawingInformation('P', Color.YELLOW);
     }
 
     public void resetCoordinates() {
         // Riporta il giocatore alla posizione iniziale
-        getCoordinates().moveTo(initialCoordinates);
+        this.coordinates = new Coordinates (initialCoordinates.getRow(), initialCoordinates.getCol());
+       
     }
 
     public int getLife() {
