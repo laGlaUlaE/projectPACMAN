@@ -33,7 +33,7 @@ public class Player extends Controllable {
     @Override
     public void update() {
         // Aggiorna la posizione del giocatore in base alla direzione
-        Coordinates new newCoords = getNextCoordinates(direction); 
+        Coordinates newCoords = getNextCoordinates(direction); 
         this.coordinates = newCoords;
     }
 
